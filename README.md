@@ -1,13 +1,4 @@
 # platform-components
-Building blocks of the platform
-
-- Includes services running inside the cluster, being managed by GitOps
-- How we install and configure (baseline - not env specific):
-  -  ArgoCD
-  -  MetalLB
-  -  Harbor
-  -  Vault
-  -  cert-manager
-  -  ingress-nginx
-- Helm definitions and standards for these services
-- Runbooks for operating?????
+Defines and configures the core platform services running inside the cluster, managed declaratively via ArgoCD. Contains ArgoCD Application manifests and environment-specific Helm values for baseline services including ArgoCD (self-managed post-bootstrap), Harbor, Vault, cert-manager, ingress-nginx, and the observability stack (Prometheus, Grafana).
+Responsible for: GitOps management of platform services, environment-specific configuration per service, and ArgoCD App of Apps bootstrap manifest.
+Does not manage: application workloads (see platform-deploy), reusable application Helm charts (see platform-charts), or infrastructure provisioning (see platform-infra).
