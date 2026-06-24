@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  sources:
+    # Source 1: official helm chart. Values: https://github.com/metallb/metallb/blob/main/charts/metallb/values.yaml
+    - repoURL: https://metallb.github.io/metallb
+      chart: metallb
+      targetRevision: 0.16.1
+      helm:
+        valueFiles:
+          - $values/services/metallb/values.yaml # use values from $values alias
+    # Source 2: our repo 
+    - repoURL: git@github.com:somepulp/platform-components
+      targetRevision: HEAD
+      ref: values # this source is aliased as $values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
