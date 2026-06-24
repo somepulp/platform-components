@@ -14,11 +14,15 @@ spec:
       targetRevision: 0.16.1
       helm:
         valueFiles:
-          - $values/services/metallb/values.yaml # use values from $values alias
+          - $values/services/metallb-helm/values.yaml # use values from $values alias
     # Source 2: our repo 
     - repoURL: git@github.com:somepulp/platform-components
       targetRevision: HEAD
       ref: values # this source is aliased as $values
+    # Source 3: path to tell argoCD to apply all YAML files in the directory
+    - repoURL: git@github.com:somepulp/platform-components
+      targetRevision: HEAD
+      path: services/metallb
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
