@@ -1,0 +1,7 @@
+# MetalLB Helm Values
+# Using Layer 2 mode - IP pool and advertisement configured via CRDs (Custom Resource Definitions)
+# (ipaddresspool.yaml and l2advertisement.yaml)
+controller:
+  tolerations: []
+speaker:
+  tolerations: []
