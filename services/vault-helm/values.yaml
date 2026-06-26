@@ -1,0 +1,10 @@
+# Vault Helm values
+# Running in dev mode for local environment
+# See ADR-007 for reasoning and migration path to production mode
+# Reference: https://developer.hashicorp.com/vault/docs/deploy/kubernetes/helm/configuration
+server:
+  dev:
+    enabled: true
+    devRootToken: "root"
+ui:
+  enabled: true
