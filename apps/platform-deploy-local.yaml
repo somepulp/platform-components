@@ -11,6 +11,8 @@ spec:
     repoURL: git@github.com:somepulp/platform-deploy
     targetRevision: cluster/local
     path: .
+    directory:
+      recurse: true
   destination: 
     server: https://kubernetes.default.svc
     namespace: argocd
