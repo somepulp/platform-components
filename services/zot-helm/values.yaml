@@ -34,7 +34,7 @@ configFiles:
     }
 
 # HTTPRoute via Envoy Gateway 
-httpRoute:
+httproute:
   enabled: true
   hostnames: 
     - zot.platform
@@ -45,6 +45,6 @@ httpRoute:
       kind: Gateway
 
 # Persistence using k3s local-path-provisioner
-persistence:
-  enabled: true
-  size: 10Gi
+persistence: true
+pvc:
+  storage: 10Gi
