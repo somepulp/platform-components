@@ -1,0 +1,50 @@
+# Zot Helm values
+# Reference: https://zotregistry.dev/v2.1.11/admin-guide/admin-getting-started/
+# Reference: https://github.com/project-zot/helm-charts
+
+# Mount the VSO-synced htpasswd secret (zot-secret) at /secret 
+mountSecret: true 
+
+configFiles:
+  config.json: |
+    {
+      "storage": {
+        "rootDirectory": "/var/lib/registry"
+      },
+      "http": {
+        "address": "0.0.0.0",
+        "port": "5000",
+        "auth": {
+          "htpasswd": {
+            "path": "/secret/htpasswd"
+          }
+        }
+      },
+      "log": {
+        "level": "info"
+      },
+      "extensions": {
+        "search": {
+          "enable": true
+        },
+        "ui": {
+          "enable": true
+        }
+      }
+    }
+
+# HTTPRoute via Envoy Gateway 
+httpRoute:
+  enabled: true
+  hostnames: 
+    - zot.platform
+  parentRefs:
+    - name: platform-gateway
+      namespace: envoy-gateway-system
+      group: gateway.networking.k8s.io
+      kind: Gateway
+
+# Persistence using k3s local-path-provisioner
+persistence:
+  enabled: true
+  size: 10Gi

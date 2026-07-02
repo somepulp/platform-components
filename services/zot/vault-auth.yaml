@@ -1,0 +1,13 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: zot-vault-auth
+  namespace: zot
+spec:
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: zot
+    serviceAccount: zot-vault-auth
+    audiences:
+      - vault
