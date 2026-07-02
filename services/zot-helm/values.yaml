@@ -43,6 +43,7 @@ httproute:
       namespace: envoy-gateway-system
       group: gateway.networking.k8s.io
       kind: Gateway
+      sectionName: https
 
 # Persistence using k3s local-path-provisioner
 persistence: true
