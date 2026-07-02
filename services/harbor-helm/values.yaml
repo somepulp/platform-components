@@ -1,0 +1,25 @@
+# Harbor Helm values
+# Reference: https://github.com/goharbor/harbor-helm/blob/main/values.yaml
+# expose.type: clusterIP — Harbor is internal only, external access via HTTPRoute in platform-deploy
+# TLS terminated at Envoy Gateway, not Harbor
+
+expose:
+  type: clusterIP
+  tls:
+    enabled: false
+
+externalURL: https://harbor.platform
+
+# Admin password sourced from Vault via VSO
+# VSO syncs secret/harbor/admin into the Kubernetes Secret: harbor-admin-secret
+existingSecretAdminPassword: harbor-admin-secret
+existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
+
+# Persistence using k3s local-path-provisioner (default StorageClass)
+persistence:
+  enabled: true
+  resourcePolicy: keep
+
+# Disable Trivy on Pi - too resource intensive for ARM64
+trivy: 
+  enabled: false
