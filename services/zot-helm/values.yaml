@@ -3,6 +3,7 @@
 # Reference: https://github.com/project-zot/helm-charts
 
 # Mount the VSO-synced htpasswd secret (zot-secret) at /secret 
+mountConfig: true
 mountSecret: true 
 
 configFiles:
@@ -49,3 +50,7 @@ httproute:
 persistence: true
 pvc:
   storage: 10Gi
+
+service:
+  type: ClusterIP
+  port: 5000
