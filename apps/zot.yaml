@@ -18,7 +18,7 @@ spec:
       targetRevision: HEAD
       ref: values
     - repoURL: git@github.com:somepulp/platform-components
-      targetReision: HEAD
+      targetRevision: HEAD
       path: services/zot
   destination:
     server: https://kubernetes.default.svc
